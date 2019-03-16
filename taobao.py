@@ -15,7 +15,7 @@ sales_num_pattern = '"view_sales":"([\S\s]*?)",'
 location_pattern = '"item_loc":"([\S\s]*?)",'
 comment_pattern = '"comment_count":"([\S\s]*?)",'
 
-headers1 = {
+headers = {
 'authority': 's.taobao.com',
 'method': 'GET',
 'path': '/search?q=%E7%AC%94%E8%AE%B0%E6%9C%AC%E7%94%B5%E8%84%91&imgfile=&js=1&stats_click=search_radio_all%3A1&initiative_id=staobaoz_20190312&ie=utf8&bcoffset=7&p4ppushleft=%2C48&ntoffset=7&s=0',
@@ -27,19 +27,8 @@ headers1 = {
 'cookie': 'xxxxxxxxxx',
 'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/72.0.3626.121 Safari/537.36'
 }
-headers2 = {
-'authority': 's.taobao.com',
-'method': 'GET',
-'path': '/search?q=%E7%AC%94%E8%AE%B0%E6%9C%AC%E7%94%B5%E8%84%91&imgfile=&js=1&stats_click=search_radio_all%3A1&initiative_id=staobaoz_20190312&ie=utf8&bcoffset=4&p4ppushleft=%2C48&ntoffset=4&s=44',
-'scheme': 'https',
-'accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/webp,image/apng,*/*;q=0.8',
-'accept-encoding': 'gzip, deflate, br',
-'accept-language': 'zh-CN,zh;q=0.9',
-'cache-control': 'max-age=0',
-'cookie': 'xxxxxxx',
-'user-agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_14_3) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/72.0.3626.121 Safari/537.36'
-}
 
+#将提取的数据转换成str
 def getstr(x):
     return str(x[0])
 
@@ -62,6 +51,7 @@ for body in body_html:
     store_info = {'store':getstr(store),'head':getstr(head),'price':getstr(price),'sales':getstr(sales),'location':getstr(location),'comment':getstr(comment)}
     taobao_num.append(store_info)
 
+ #创建CSV文件存储数据
 fq = open('taobao_02.csv','w',encoding='utf-8')
 fq.write('store,head,price,sales,location,comment,\n')
 
